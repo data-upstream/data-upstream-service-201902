@@ -10,7 +10,9 @@ See the .ruby-version file in repo.
 
 * software developers
 
+
 pip install jupyter
+cd APP_DIR/python-notebooks
 jupyter
 
 get the notebooks from: ...... [todo]
