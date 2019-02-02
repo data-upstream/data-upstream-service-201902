@@ -7,6 +7,12 @@ Things you may want to cover:
 
 * Ruby version
 
+jruby
+gem install puma (do not add it to Gemfile)
+
+jruby
+gem install puma (do not add it to Gemfile)
+
 * System dependencies
 
 * Configuration
