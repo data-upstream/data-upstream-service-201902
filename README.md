@@ -1,19 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+see the doc in .... [todo]
 
-Things you may want to cover:
+* (j)Ruby version
 
-* Ruby version
-
-jruby
-gem install puma (do not add it to Gemfile)
-
-jruby
-gem install puma (do not add it to Gemfile)
+See the .ruby-version file in repo.
 
 * System dependencies
+
+* software developers
+
+pip install jupyter
+jupyter
+
+get the notebooks from: ...... [todo]
 
 * Configuration
 
@@ -27,6 +27,3 @@ gem install puma (do not add it to Gemfile)
 
 * Deployment instructions
 
-* ...
-# data-upstream-api-201902
-# data-upstream-service-201902
