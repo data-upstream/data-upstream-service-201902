@@ -1,3 +1,5 @@
+module Api::V1
+
 class Users::StreamsController < ApplicationController
   before_action :require_read_write_user_access_token
   before_action :assign_device, only: [:update, :show]
@@ -57,4 +59,6 @@ class Users::StreamsController < ApplicationController
       render json: {errors: ["Not allowed to access this device"]}, status: :forbidden
     end
   end
+end
+
 end
