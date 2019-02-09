@@ -15,6 +15,12 @@ pip install jupyter
 cd APP_DIR/python-notebooks
 jupyter
 
+* testing
+
+./bin/bundle install
+
+./bin/bundle exec rspec
+
 get the notebooks from: ...... [todo]
 
 * Configuration
