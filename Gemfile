@@ -24,6 +24,8 @@ gem 'listen'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rspec'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors', require: 'rack/cors'
 
