@@ -1,5 +1,7 @@
 module Api::V1
   class UsersController < ApplicationController
+    include Concerns::Sessions
+
     before_action :require_read_write_user_access_token, only: [:profile]
 
     def create

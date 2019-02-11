@@ -1,4 +1,6 @@
-module Sessions
+module Api::V1::Concerns::Sessions
+  extend ActiveSupport::Concern
+
   attr_writer :access_token
 
   def raw_access_token
