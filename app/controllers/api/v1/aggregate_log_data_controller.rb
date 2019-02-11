@@ -1,4 +1,5 @@
 class AggregateLogDataController < ApplicationController
+  include Concerns::Sessions
   before_action :require_user_access_token
 
   def index
