@@ -1,8 +1,8 @@
 module Api::V1
 
 class Users::StreamsController < ApplicationController
-  include Concerns::Sessions
-  
+  include Api::V1::Concerns::Sessions
+
   before_action :require_read_write_user_access_token
   before_action :assign_device, only: [:update, :show]
   before_action :ensure_authorized_user, only: [:update, :show]

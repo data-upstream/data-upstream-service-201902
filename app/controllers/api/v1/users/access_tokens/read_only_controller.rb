@@ -1,6 +1,8 @@
 module Api::V1
 
   class Users::AccessTokens::ReadOnlyController < ApplicationController
+    include Api::V1::Concerns::Sessions
+
     before_action :require_read_write_user_access_token
 
     def index

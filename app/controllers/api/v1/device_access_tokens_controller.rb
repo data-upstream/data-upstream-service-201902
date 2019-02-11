@@ -1,7 +1,8 @@
 module Api::V1
 
   class DeviceAccessTokensController < ApplicationController
-    include Concerns::Sessions
+    include Api::V1::Concerns::Sessions
+
     before_action :require_read_write_user_access_token
     before_action :assign_device
 
