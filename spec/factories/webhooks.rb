@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :webhook do
     url "http://www.example.com/hook.json"
     device

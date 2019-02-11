@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :system_config do
     key "MyString"
     value "MyString"

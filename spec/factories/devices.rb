@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :device do
     key_rotation_enabled false
     user
