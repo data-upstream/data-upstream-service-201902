@@ -1,4 +1,6 @@
-module WebhooksExecutor
+module Api::V1::Concerns::WebhooksExecutor
+  extend ActiveSupport::Concern
+
   module Events
     LOG_DATA_CREATED = "log_data_created"
     IMAGES_CREATED   = "images_created"

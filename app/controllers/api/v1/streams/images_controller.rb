@@ -1,5 +1,5 @@
 class Streams::ImagesController < ApplicationController
-  include WebhooksExecutor
+  include Api::V1::Concerns::WebhooksExecutor
 
   before_action :require_device_access_token
   before_action :assign_log_datum
@@ -17,7 +17,7 @@ class Streams::ImagesController < ApplicationController
     end
 
     current_device.webhooks.where(active: true).each do |webhook|
-      execute_webhook(webhook, WebhooksExecutor::Events::IMAGES_CREATED, @images)
+      execute_webhook(webhook, Api::V1::Concerns::WebhooksExecutor::Events::IMAGES_CREATED, @images)
     end
 
     render json: @images.as_json(methods: :image_url)
