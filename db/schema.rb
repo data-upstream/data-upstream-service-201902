@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_05_051208) do
+ActiveRecord::Schema.define(version: 2019_03_02_150530) do
 
-  create_table "access_tokens", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "access_tokens", id: :serial, force: :cascade do |t|
     t.string "token"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["user_id"], name: "index_access_tokens_on_user_id"
   end
 
-  create_table "device_access_tokens", force: :cascade do |t|
+  create_table "device_access_tokens", id: :serial, force: :cascade do |t|
     t.string "token"
     t.integer "sequence"
     t.integer "device_id"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["token"], name: "index_device_access_tokens_on_token", unique: true
   end
 
-  create_table "devices", force: :cascade do |t|
+  create_table "devices", id: :serial, force: :cascade do |t|
     t.integer "last_used_key_sequence", default: -1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,14 +49,14 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["uuid"], name: "index_devices_on_uuid", unique: true
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "images", id: :serial, force: :cascade do |t|
     t.integer "log_datum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["log_datum_id"], name: "index_images_on_log_datum_id"
   end
 
-  create_table "log_data", force: :cascade do |t|
+  create_table "log_data", id: :serial, force: :cascade do |t|
     t.integer "device_id"
     t.json "payload"
     t.datetime "created_at", null: false
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["device_id"], name: "index_log_data_on_device_id"
   end
 
-  create_table "system_configs", force: :cascade do |t|
+  create_table "system_configs", id: :serial, force: :cascade do |t|
     t.string "key"
     t.string "value"
     t.datetime "created_at", null: false
@@ -69,7 +72,7 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["key"], name: "index_system_configs_on_key", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", null: false
@@ -77,14 +80,21 @@ ActiveRecord::Schema.define(version: 2018_02_05_051208) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "webhooks", force: :cascade do |t|
+  create_table "webhooks", id: :serial, force: :cascade do |t|
     t.string "url", null: false
     t.boolean "active", default: true, null: false
     t.integer "device_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "secret"
+    t.json "http_headers", default: [], array: true
     t.index ["device_id"], name: "index_webhooks_on_device_id"
   end
 
+  add_foreign_key "access_tokens", "users"
+  add_foreign_key "device_access_tokens", "devices"
+  add_foreign_key "devices", "users"
+  add_foreign_key "images", "log_data"
+  add_foreign_key "log_data", "devices"
+  add_foreign_key "webhooks", "devices"
 end

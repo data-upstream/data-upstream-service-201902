@@ -1,9 +1,9 @@
 module Api::V1
 
   class LogDataController < ApplicationController
-    include Api::V1::Concerns::Sessions
+    include Concerns::Sessions
 
-    include WebhooksExecutor
+    include Concerns::WebhooksExecutor
     
     before_action :require_device_access_token
 
