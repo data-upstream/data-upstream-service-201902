@@ -1,28 +1,32 @@
-class AggregateLogDataController < ApplicationController
-  include Api::V1::Concerns::Sessions
+module Api::V1
 
-  before_action :require_user_access_token
+  class AggregateLogDataController < ApplicationController
+    include Concerns::Sessions
 
-  def index
-    @devices = current_user.devices.where(id: device_ids)
+    before_action :require_user_access_token
 
-    response_hash = @devices.reduce({}) do |hash, device|
-      hash[device.id] = device.log_data.order(id: :desc).paginate(page: params[:page], per_page: params[:limit]).reverse
-      hash
+    def index
+      @devices = current_user.devices.where(id: device_ids)
+
+      response_hash = @devices.reduce({}) do |hash, device|
+        hash[device.id] = device.log_data.order(id: :desc).paginate(page: params[:page], per_page: params[:limit]).reverse
+        hash
+      end
+
+      render json: response_hash
     end
 
-    render json: response_hash
-  end
+    private
 
-  private
+    def device_ids
+      return @device_ids if @device_ids
 
-  def device_ids
-    return @device_ids if @device_ids
-
-    begin
-      @device_ids = JSON.parse(params[:device_ids])
-    rescue
-      @device_ids = []
+      begin
+        @device_ids = JSON.parse(params[:device_ids])
+      rescue
+        @device_ids = []
+      end
     end
   end
+
 end
