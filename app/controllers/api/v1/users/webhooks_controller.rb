@@ -39,7 +39,7 @@ module Api::V1
     private
 
     def webhook_params
-      params.permit(:url, :active, :secret, :http_headers => [:key, :value])
+      params.permit(:url, :method, :active, :secret, :http_headers => [:key, :value])
     end
 
     def assign_device

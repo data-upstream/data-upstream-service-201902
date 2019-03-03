@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_150530) do
+ActiveRecord::Schema.define(version: 2019_03_03_081917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_03_02_150530) do
     t.datetime "updated_at", null: false
     t.string "secret"
     t.json "http_headers", default: [], array: true
+    t.string "method"
     t.index ["device_id"], name: "index_webhooks_on_device_id"
   end
 
