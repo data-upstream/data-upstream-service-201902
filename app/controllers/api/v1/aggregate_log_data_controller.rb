@@ -1,7 +1,7 @@
 module Api::V1
 
   class AggregateLogDataController < ApplicationController
-    include Concerns::Sessions
+    include Api::V1::Concerns::Sessions
 
     before_action :require_user_access_token
 
