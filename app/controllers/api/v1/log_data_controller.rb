@@ -1,9 +1,10 @@
 module Api::V1
 
   class LogDataController < ApplicationController
-    include Concerns::Sessions
 
-    include Concerns::WebhooksExecutor
+    include Api::V1::Concerns::Sessions
+
+    include Api::V1::Concerns::WebhooksExecutor
     
     before_action :require_device_access_token
 
@@ -18,7 +19,7 @@ module Api::V1
 
       if @log_datum.save
         current_device.webhooks.where(active: true).each do |webhook|
-          execute_webhook(webhook, WebhooksExecutor::Events::LOG_DATA_CREATED, @log_datum)
+          execute_webhook(webhook, Api::V1::Concerns::WebhooksExecutor::Events::LOG_DATA_CREATED, @log_datum)
         end
 
         render json: @log_datum

@@ -14,9 +14,10 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       origins ENV["CORS_ORIGIN"]
     end
     resource '*',
-      headers: :any,
-      methods: [:get, :post, :options, :put, :delete],
-      credentials: true
+    headers: :any,
+    expose: ['X-Total-Count'],
+    methods: [:get, :post, :options, :put, :delete],
+    credentials: true
   end
 end
 
