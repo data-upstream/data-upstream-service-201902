@@ -16,6 +16,15 @@ module Api::V1
       render json: @webhooks
     end
 
+    def show
+      # grab just the webhooks under this stream_id
+      # the device_ids will only contain this stream_id
+      # probably useless endpoint, KIV
+      @webhooks = get_webhook_with_device_ids([params[:stream_id]]);
+
+      render json: @webhooks
+    end
+
     def create
       @webhook = Webhook.new(webhook_params)
 
@@ -87,7 +96,15 @@ module Api::V1
     end
 
     def get_webhook_with_device_ids(device_ids)
-      Webhook.includes(:devices).where("devices.id": device_ids).references(:devices)
+      # the webhooks returned won't contain any device_id as before
+      webhooks = Webhook.includes(:devices).where("devices.id": device_ids).references(:devices)
+
+      # append device_ids manually and return
+      webhook_arr = webhooks.to_a
+      webhooks.each_with_index do |w, i|
+        webhook_arr[i][:device_ids] = w.devices.ids
+      end
+      webhooks
     end
   end
 
