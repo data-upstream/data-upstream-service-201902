@@ -13,7 +13,8 @@ Rails.application.routes.draw do
             get 'read_only', to: 'access_tokens/read_only#index'
           end
           resources :streams, only: [:index, :create, :show, :update] do
-            resources :webhooks, only: [:destroy]  
+            resources :webhooks, only: [:destroy]
+            get 'webhooks', to: 'webhooks#show'
           end
           resources :webhooks, only: [:index, :create, :update]
         end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_142631) do
+ActiveRecord::Schema.define(version: 2019_03_10_144133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_142631) do
     t.json "http_headers", default: [], array: true
     t.string "method"
     t.string "name"
+    t.integer "device_ids", default: [], array: true
   end
 
   add_foreign_key "access_tokens", "users"
