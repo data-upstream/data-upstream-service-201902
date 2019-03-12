@@ -1,5 +1,18 @@
 # README
 
+## setup
+
+* brew install postresql
+* brew services start postresql
+
+* psql postgres
+* CREATE DATABASE "dataupstream_development";
+* CREATE ROLE dataupstream LOGIN PASSWORD 'dataupstream';
+
+* export RAILS_ENV=development
+* bin/rake db:migrate
+* bin/rails s
+
 see the doc in .... [todo]
 
 * (j)Ruby version
