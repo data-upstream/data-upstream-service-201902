@@ -8,6 +8,7 @@
 * psql postgres
 * CREATE DATABASE "dataupstream_development";
 * CREATE ROLE dataupstream LOGIN PASSWORD 'dataupstream';
+* GRANT ALL PRIVILEGES ON DATABASE dataupstream_development TO dataupstream;
 
 * export RAILS_ENV=development
 * bin/rake db:migrate
