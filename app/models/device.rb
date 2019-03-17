@@ -4,6 +4,7 @@ class Device < ActiveRecord::Base
   has_many :log_data, dependent: :destroy
   has_many :device_webhooks, dependent: :destroy
   # cannot do distinct on webhooks due to PSQL inequality error on json
+  # every webhook under a device in device_webhooks should be unique due to unique name
   has_many :webhooks, through: :device_webhooks
 
   validates :uuid, presence: true, uniqueness: true
