@@ -3,7 +3,8 @@ class Device < ActiveRecord::Base
   has_many :device_access_tokens, dependent: :destroy
   has_many :log_data, dependent: :destroy
   has_many :device_webhooks, dependent: :destroy
-  has_many :webhooks, -> { distinct }, through: :device_webhooks
+  # cannot do distinct on webhooks due to PSQL inequality error on json
+  has_many :webhooks, through: :device_webhooks
 
   validates :uuid, presence: true, uniqueness: true
 
