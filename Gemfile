@@ -29,6 +29,7 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'will_paginate'
 gem 'devise'
+gem 'rest-client'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

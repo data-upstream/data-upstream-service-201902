@@ -7,17 +7,23 @@ module Api::V1::Concerns::WebhooksExecutor
   end
 
   def execute_webhook(webhook, event, payload)
-    # TODO: insert current_device's device_id into request_boy
+    
+    secret_value = nil
+    # extract out the secret key from header if any
+    if (webhook[:http_headers] && webhook[:http_headers].is_a?(Array))
+      secret_obj = webhook[:http_headers].find { |i| i['key'] === 'secret' }
+      secret_value = secret_obj && secret_obj['value']
+    end
+
     request_body = {
-      secret: webhook.secret, # substitute with secret from header;
-      event: event, # remove event from request_body;
-      data: payload
+      secret: secret_value,
+      data: payload # device id is contained in payload
     }
 
-    # TODO: post based on method saved on webook model
-    # url here can be external cloud
-    # TODO: check RestClient whether can support port
-    RestClient.post webhook.url, request_body.to_json, {content_type: :json}
+    # RestClient.post webhook.url, request_body.to_json, {content_type: :json}
+    # due to insecure SSL
+    method = webhook[:method] || "POST"
+    response = RestClient::Request.execute(method: method, url: webhook.url, payload: request_body.to_json, headers: {content_type: :json}, verify_ssl: false)
   rescue => e
   end
 end
