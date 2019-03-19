@@ -24,6 +24,10 @@ module Api::V1::Concerns::WebhooksExecutor
     # due to insecure SSL
     method = webhook[:method] || "POST"
     response = RestClient::Request.execute(method: method, url: webhook.url, payload: request_body.to_json, headers: {content_type: :json}, verify_ssl: false)
+    webhook.last_invoked = { status: true, date: Time.zone.now }
+    webhook.save
   rescue => e
+    webhook.last_invoked = { status: false, date: Time.zone.now }
+    webhook.save
   end
 end
