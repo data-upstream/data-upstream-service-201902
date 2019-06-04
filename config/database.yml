@@ -27,3 +27,5 @@ test:
 production:
   <<: *default
   database: dataupstream_production
+  username: 'dataupstream'
+  password: 'dataupstream'

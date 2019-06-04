@@ -25,3 +25,4 @@
 /db/test.sqlite3
 
 setenv.sh
+setenv_prod.sh
